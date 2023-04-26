@@ -29,6 +29,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         myImages.count
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MyCollectionViewCell
         else{
