@@ -35,7 +35,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             return UICollectionViewCell()
         }
         cell.myImageView.image = myImages[indexPath.row]
-        cell.myImageView.layer.cornerRadius = 10
+        cell.myImageView.layer.cornerRadius = 15
         return cell
     }
     

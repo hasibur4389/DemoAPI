@@ -60,12 +60,12 @@
 			children = (
 				F3EEB54C29F92CE400E7933D /* AppDelegate.swift */,
 				F3EEB54E29F92CE400E7933D /* SceneDelegate.swift */,
+				F3EEB56029F9316500E7933D /* MyCollectionViewCell.swift */,
 				F3EEB55029F92CE400E7933D /* ViewController.swift */,
 				F3EEB55229F92CE400E7933D /* Main.storyboard */,
 				F3EEB55529F92CE500E7933D /* Assets.xcassets */,
 				F3EEB55729F92CE500E7933D /* LaunchScreen.storyboard */,
 				F3EEB55A29F92CE500E7933D /* Info.plist */,
-				F3EEB56029F9316500E7933D /* MyCollectionViewCell.swift */,
 			);
 			path = DemoAPI;
 			sourceTree = "<group>";
