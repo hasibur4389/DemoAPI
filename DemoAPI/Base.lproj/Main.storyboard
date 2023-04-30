@@ -74,6 +74,35 @@
             </objects>
             <point key="canvasLocation" x="1028.2442748091603" y="3.5211267605633805"/>
         </scene>
+        <!--Show ImageVC-->
+        <scene sceneID="uyc-CV-v3q">
+            <objects>
+                <viewController storyboardIdentifier="ShowImageVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tdh-Cp-MOy" customClass="ShowImageVC" customModule="DemoAPI" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0fh-em-8uw">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hEd-xL-zbI">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jpX-Jr-cCo"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jpX-Jr-cCo" firstAttribute="bottom" secondItem="hEd-xL-zbI" secondAttribute="bottom" id="2zc-HQ-LXj"/>
+                            <constraint firstItem="hEd-xL-zbI" firstAttribute="top" secondItem="jpX-Jr-cCo" secondAttribute="top" id="GHo-Ka-7HQ"/>
+                            <constraint firstItem="hEd-xL-zbI" firstAttribute="leading" secondItem="jpX-Jr-cCo" secondAttribute="leading" id="eeb-U6-mi7"/>
+                            <constraint firstItem="jpX-Jr-cCo" firstAttribute="trailing" secondItem="hEd-xL-zbI" secondAttribute="trailing" id="sd2-E7-2fL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="myImage" destination="hEd-xL-zbI" id="MEL-yZ-FW5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ATe-1P-VPd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1792" y="4"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="1JJ-7d-WKn">
             <objects>
