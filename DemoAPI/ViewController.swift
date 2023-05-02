@@ -14,6 +14,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
    
     
     var unsplashItems = [UnsplashItem]()
+    var loader: UIAlertController?
+    let per_page = 15
+    var page = 1
 
     @IBOutlet var myCollectionView: UICollectionView!
     
@@ -26,7 +29,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 //        }
 //
         // Fetch Data from API
-        fetchAPIData()
+        fetchAPIData(pageNo: page)
             
         
          
@@ -35,21 +38,30 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         // Do any additional setup after loading the view.
     }
     
-    func fetchAPIData(){
+    func fetchAPIData(pageNo: Int){
         
-        let url = "https://api.unsplash.com/photos/?client_id=s4zDoLC4blWmZ9WWvz75UHtB_luHbCVNa0YZ-eN2iNI"
+        var url = "https://api.unsplash.com/photos/?client_id=sWB7EZzrIDG--PoBd4j-BxAGdT6Jr5mTQ3zoFkSF8Go"
+        url = url + "&page=\(pageNo)" + "&per_page=\(per_page)"
+       // print(url)
         
         AF.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).response { response in
             switch response.result{
             case .success(let data):
                 do{
 //                    print(response.result)
-                    
                     let jsonData = try JSONDecoder().decode([UnsplashItem].self , from: data!)
                     // parsing Data
-                    self.unsplashItems = jsonData
+                    
+                    self.unsplashItems.append(contentsOf: jsonData)
                     print("Calling reloadData()")
+                    
+                    //insert cells
+                    let indexpathArray = [IndexPath]()
+                    
+                    
                     self.myCollectionView.reloadData()
+//
+                   // self.myCollectionView.insertItems(at: indexpathArray)
                  
                 }
                 catch{
@@ -65,7 +77,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
    
     
-    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if indexPath.row == unsplashItems.count - 6{
+            // load another 15 images
+            page += 1
+            fetchAPIData(pageNo: page)
+        }
+    }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -75,11 +94,16 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let item = unsplashItems[indexPath.row]
         
         //vc.largeImage = unsplashItems[indexPath.item]
-        //DispatchQueue.global().async { [self] in
-            setImage(item: item, vc: vc)
-       // }
         
-        navigationController?.pushViewController(vc, animated: true)
+        // starting loader View
+        
+        loader = self.loader()
+
+        DispatchQueue.global().async { [self] in
+            setImage(item: item, vc: vc)
+        }
+        
+     //   navigationController?.pushViewController(vc, animated: true)
          
        
       }
@@ -88,20 +112,21 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         print("in setImage")
        //download
-        let catPictureURL = URL(string: item.urls["raw"]!)!
+        let catPictureURL = URL(string: item.urls["regular"]!)!
 
             // Creating a session object with the default configuration.
             
             let session = URLSession(configuration: .default)
 
             // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
-            let downloadPicTask = session.dataTask(with: catPictureURL) { [self] (data, response, error) in
+            let downloadPicTask = session.dataTask(with: catPictureURL) { (data, response, error) in
                 // The download has finished.
                 if let e = error {
                     print("Error downloading cat picture: \(e)")
                 } else {
                     // No errors found.
                     // It would be weird if we didn't have a response, so check for that too.
+                    print("after setImage")
                     if let res = response as? HTTPURLResponse {
                         print("Downloaded cat picture with response code \(res.statusCode)")
                         if let imageData = data {
@@ -109,8 +134,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                             DispatchQueue.main.async {
                                 let image = UIImage(data: imageData)
                                 vc.largeImage = image
-                             
-                                print("in setImage \(vc.largeImage)")
+                             //   vc.loaderView = self.loader
+//                                print("in setImage \(vc.largeImage!)")
+                                
+                                // used escape sequence
+                                self.stopLoader(loader: self.loader!) {
+                                    self.navigationController?.pushViewController(vc, animated: true)
+                                }
                             }
                            // print("in CollectionViewCell")
                            
@@ -131,7 +161,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
     }
     
-    
+    //MARK: - Collectionview
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         unsplashItems.count
     }

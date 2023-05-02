@@ -37,7 +37,7 @@ class MyCollectionViewCell: UICollectionViewCell {
                             print("Downloaded cat picture with response code \(res.statusCode)")
                             if let imageData = data {
                                 // Finally convert that Data into an image and do what you wish with it.
-                                DispatchQueue.main.async {
+                                DispatchQueue.main.async { [self] in
                                     let image = UIImage(data: imageData)
                                     myImageView.image = image
                                 }
