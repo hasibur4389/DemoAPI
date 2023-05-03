@@ -15,6 +15,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     var unsplashItems = [UnsplashItem]()
     var loader: UIAlertController?
+    
     let per_page = 15
     var page = 1
 
@@ -40,28 +41,94 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func fetchAPIData(pageNo: Int){
         
+        print("Page no \(pageNo)")
         var url = "https://api.unsplash.com/photos/?client_id=sWB7EZzrIDG--PoBd4j-BxAGdT6Jr5mTQ3zoFkSF8Go"
         url = url + "&page=\(pageNo)" + "&per_page=\(per_page)"
        // print(url)
+        print("In fetchAPIData")
         
         AF.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).response { response in
+            
+            print("IN REQUEST \(response.result)")
+            
             switch response.result{
+                
+                
             case .success(let data):
                 do{
-//                    print(response.result)
-                    let jsonData = try JSONDecoder().decode([UnsplashItem].self , from: data!)
+                    print("In success")
+                     
+                    //let jsonData = try JSONDecoder().decode([UnsplashItem].self , from: data!)
+
+                // Catch anything then convert to my unsplashitem
+                    
+                    
+                   // var jsonData = [UnsplashItem]()
+                    let currentCount = self.unsplashItems.count
+
+                    
+                    if let data {
+                         
+                       let json = try? JSONSerialization.jsonObject(with: data, options: [])
+                      //  print("data is \(json)")
+                        
+                        
+                      
+                        // Rate Limit Exceeded Handling
+                       
+                        guard let json else{
+                            print("Rate Limit Exceeded (50req/hr)")
+                            return
+                        }
+                        
+                        
+                        
+                        if let json = json as? Dictionary<String, Any> {
+                            //check api error
+                            let errors = json["errors"]
+                            print("the error is \(errors!)")
+                            
+                        }else{
+                            print("not error")
+                        }
+                        
+                        if let json = json as? [[String: Any]] {
+                            //unsplash create
+                            print("Creating UnspalshItem")
+                            for j in json{
+                                if let id = j["id"] as? String, let urls = j["urls"] as? [String: String] {
+                                    let item = UnsplashItem(id: id, urls: urls)
+                                    self.unsplashItems.append(item)
+                                }
+                            }
+                        }else{
+                            print("not Data")
+                        }
+                            
+                    }
+                    else{
+                        print("failed decoding api data")
+                    }
+                 
+//
+                 
+                    
                     // parsing Data
                     
-                    self.unsplashItems.append(contentsOf: jsonData)
+                 //   self.unsplashItems.append(contentsOf: jsonData)
                     print("Calling reloadData()")
                     
                     //insert cells
-                    let indexpathArray = [IndexPath]()
+                    var indexpathArray = [IndexPath]()
                     
                     
-                    self.myCollectionView.reloadData()
-//
-                   // self.myCollectionView.insertItems(at: indexpathArray)
+                    for i in currentCount...self.unsplashItems.count-1{
+                        indexpathArray.append( IndexPath(item: i, section: 0))
+                    }
+                    
+                   // self.myCollectionView.reloadData()
+                    
+                    self.myCollectionView.insertItems(at: indexpathArray)
                  
                 }
                 catch{
@@ -79,7 +146,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if indexPath.row == unsplashItems.count - 6{
+        if indexPath.item == unsplashItems.count - 6{
             // load another 15 images
             page += 1
             fetchAPIData(pageNo: page)
@@ -162,6 +229,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     //MARK: - Collectionview
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         unsplashItems.count
     }

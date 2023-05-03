@@ -61,4 +61,18 @@ class MyCollectionViewCell: UICollectionViewCell {
             
         }
     }
+    
+    
+    // reusing the cell to avoid image flickering
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        myImageView.image = nil
+        
+    }
+    
 }
+
+
+
+
