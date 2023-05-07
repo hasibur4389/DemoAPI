@@ -1,49 +1,94 @@
-//
-//  ShowImageVC.swift
-//  DemoAPI
-//
-//  Created by Hasibur Rahman on 27/4/23.
-//
-
 import UIKit
 
-class ShowImageVC: UIViewController {
+class ShowImageVC: UIViewController, UIScrollViewDelegate {
 
-    @IBOutlet var myImage: UIImageView!
+    @IBOutlet var myImageView: UIImageView!
+   
+    @IBOutlet var myScrollView: UIScrollView!
+        var imageWidth: CGFloat = 0.0
+    var imageHeight: CGFloat = 0.0
     
     var largeImage : UIImage?
-    var loaderView : UIAlertController?
-    
+    var currentScale: CGFloat = 1.0
+
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+        
        
-        // Do any additional setup after loading the view.
         print("in ShowImageVC")
-        if let largeImage {
-            myImage.image = largeImage
-            //self.stopLoader()
+        if let largeImage = largeImage {
+            myImageView.image = largeImage
+//            myScrollView.contentSize = myImageView.bounds.size
+          //  myScrollView.delegate = self
+          
+            imageWidth = myImageView.image?.size.width ?? 0.0
+            imageHeight = myImageView.image?.size.height ?? 0.0
+            myImageView.isUserInteractionEnabled = true
+            view.addSubview(myImageView)
+           // myScrollView.addSubview(myImageView)
+           // myImageView.center = myScrollView.center
+            
+//                    myScrollView.contentSize = myImageView.bounds.size
+//
+//
+//                    myScrollView.showsVerticalScrollIndicator = true
+//                    myScrollView.showsHorizontalScrollIndicator = true
+
         }
         else {
             print("found nil")
         }
+      //  setupScrollView()
+      // addGesture()
+    
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-//        if let loaderView {
-//                   self.stopLoader(loader: loaderView, completion: nil)
-//               }
-//               else {
-//                   print("no loaderView!")
-//        }
-    }
-    /*
-    // MARK: - Navigation
+    
+    
+//    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+//        // Adjust the content offset of the scroll view when zooming
+//        centerImage()
+//    }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+  
+   
+  
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return myImageView
     }
-    */
+    
+  
+    func addGesture(){
+        print("In addGesture")
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(didPinch))
+        pinchGesture.cancelsTouchesInView = false
+        myImageView.addGestureRecognizer(pinchGesture)
+    }
 
+    @objc func didPinch(_ gesture: UIPinchGestureRecognizer){
+        print("in didPinch")
+
+        if gesture.state == .began {
+              // Reset the scale factor to the current image view size
+              gesture.scale = currentScale
+            print("In begin Scale is \(gesture.scale)")
+
+          } else if gesture.state == .changed {
+              // Scale the image view based on the current pinch gesture
+              let scale = gesture.scale
+              myImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
+
+              print("After Changing Scale is \(gesture.scale)")
+          } else if gesture.state == .ended {
+              // Store the current scale factor for the next pinch gesture
+
+
+              currentScale = gesture.scale
+              print("In end \(gesture.scale)")
+          }
+    }
+    
+    
 }

@@ -82,26 +82,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hEd-xL-zbI">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
-                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" ambiguous="YES" maximumZoomScale="5" translatesAutoresizingMaskIntoConstraints="NO" id="cVS-T3-cfH">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zbh-rU-7EI">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jpX-Jr-cCo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="jpX-Jr-cCo" firstAttribute="bottom" secondItem="hEd-xL-zbI" secondAttribute="bottom" id="2zc-HQ-LXj"/>
-                            <constraint firstItem="hEd-xL-zbI" firstAttribute="top" secondItem="jpX-Jr-cCo" secondAttribute="top" id="GHo-Ka-7HQ"/>
-                            <constraint firstItem="hEd-xL-zbI" firstAttribute="leading" secondItem="jpX-Jr-cCo" secondAttribute="leading" id="eeb-U6-mi7"/>
-                            <constraint firstItem="jpX-Jr-cCo" firstAttribute="trailing" secondItem="hEd-xL-zbI" secondAttribute="trailing" id="sd2-E7-2fL"/>
+                            <constraint firstItem="cVS-T3-cfH" firstAttribute="trailing" secondItem="jpX-Jr-cCo" secondAttribute="trailing" id="7YL-sd-ABK"/>
+                            <constraint firstItem="cVS-T3-cfH" firstAttribute="top" secondItem="0fh-em-8uw" secondAttribute="top" id="boL-8u-tue"/>
+                            <constraint firstAttribute="bottom" secondItem="cVS-T3-cfH" secondAttribute="bottom" id="kJC-5O-0LX"/>
+                            <constraint firstItem="cVS-T3-cfH" firstAttribute="leading" secondItem="jpX-Jr-cCo" secondAttribute="leading" id="zAz-Wn-B4v"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="myImage" destination="hEd-xL-zbI" id="MEL-yZ-FW5"/>
+                        <outlet property="myImageView" destination="Zbh-rU-7EI" id="gt3-H4-npG"/>
+                        <outlet property="myScrollView" destination="cVS-T3-cfH" id="pf6-Z0-9dh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ATe-1P-VPd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1792" y="4"/>
+            <point key="canvasLocation" x="1791.6030534351144" y="3.5211267605633805"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1JJ-7d-WKn">

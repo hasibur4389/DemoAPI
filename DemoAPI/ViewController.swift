@@ -15,6 +15,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     var unsplashItems = [UnsplashItem]()
     var loader: UIAlertController?
+    var calls = 0
     
     let per_page = 15
     var page = 1
@@ -51,6 +52,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             
             print("IN REQUEST \(response.result)")
             
+            self.calls += 1
+            
+            print("Called the the API \(self.calls) times")
             switch response.result{
                 
                 
@@ -77,6 +81,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                         // Rate Limit Exceeded Handling
                        
                         guard let json else{
+                            self.alertMessage(title: "This is an error", message: "Rate Limit Exceeded")
                             print("Rate Limit Exceeded (50req/hr)")
                             return
                         }
@@ -87,6 +92,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                             //check api error
                             let errors = json["errors"]
                             print("the error is \(errors!)")
+                            self.alertMessage(title: "This is an error", message: errors as! String)
                             
                         }else{
                             print("not error")
@@ -102,11 +108,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                                 }
                             }
                         }else{
+                            self.alertMessage(title: "This is an error", message: "No Data found")
                             print("not Data")
                         }
                             
                     }
                     else{
+                        self.alertMessage(title: "This is an error", message: "Failed decoding API data")
                         print("failed decoding api data")
                     }
                  
@@ -132,9 +140,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                  
                 }
                 catch{
+                    self.alertMessage(title: "This is an error", message: error.localizedDescription)
                     print(error.localizedDescription)
                 }
             case .failure(let error):
+                self.alertMessage(title: "This is an error", message: error.localizedDescription)
                 print(error.localizedDescription)
             }
         }
