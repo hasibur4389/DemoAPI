@@ -82,28 +82,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" ambiguous="YES" maximumZoomScale="5" translatesAutoresizingMaskIntoConstraints="NO" id="cVS-T3-cfH">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E5K-pk-VDY">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zbh-rU-7EI">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="esJ-qA-cNg" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="obu-9h-Ech">
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="obu-9h-Ech" firstAttribute="leading" secondItem="esJ-qA-cNg" secondAttribute="leading" id="I0a-bh-aPf"/>
+                                            <constraint firstAttribute="trailing" secondItem="obu-9h-Ech" secondAttribute="trailing" id="Xil-2H-IOY"/>
+                                            <constraint firstItem="obu-9h-Ech" firstAttribute="top" secondItem="esJ-qA-cNg" secondAttribute="top" id="u2z-YK-6RG"/>
+                                            <constraint firstAttribute="bottom" secondItem="obu-9h-Ech" secondAttribute="bottom" id="xDb-29-XBm"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="esJ-qA-cNg" firstAttribute="height" secondItem="E5K-pk-VDY" secondAttribute="height" id="M9d-da-cF2"/>
+                                    <constraint firstItem="esJ-qA-cNg" firstAttribute="top" secondItem="E5K-pk-VDY" secondAttribute="top" id="OJp-fW-ZAQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="esJ-qA-cNg" secondAttribute="bottom" id="P0O-YZ-8jm"/>
+                                    <constraint firstAttribute="trailing" secondItem="esJ-qA-cNg" secondAttribute="trailing" id="X7C-m9-oax"/>
+                                    <constraint firstItem="esJ-qA-cNg" firstAttribute="width" secondItem="E5K-pk-VDY" secondAttribute="width" id="bRO-ZY-bTD"/>
+                                    <constraint firstItem="esJ-qA-cNg" firstAttribute="leading" secondItem="E5K-pk-VDY" secondAttribute="leading" id="nJz-ua-h08"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="PPk-rT-bKy"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="fQP-ev-0QL"/>
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jpX-Jr-cCo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="cVS-T3-cfH" firstAttribute="trailing" secondItem="jpX-Jr-cCo" secondAttribute="trailing" id="7YL-sd-ABK"/>
-                            <constraint firstItem="cVS-T3-cfH" firstAttribute="top" secondItem="0fh-em-8uw" secondAttribute="top" id="boL-8u-tue"/>
-                            <constraint firstAttribute="bottom" secondItem="cVS-T3-cfH" secondAttribute="bottom" id="kJC-5O-0LX"/>
-                            <constraint firstItem="cVS-T3-cfH" firstAttribute="leading" secondItem="jpX-Jr-cCo" secondAttribute="leading" id="zAz-Wn-B4v"/>
+                            <constraint firstItem="E5K-pk-VDY" firstAttribute="leading" secondItem="jpX-Jr-cCo" secondAttribute="leading" id="70J-it-LqK"/>
+                            <constraint firstItem="E5K-pk-VDY" firstAttribute="top" secondItem="0fh-em-8uw" secondAttribute="top" id="8Lb-SZ-dz7"/>
+                            <constraint firstAttribute="bottom" secondItem="E5K-pk-VDY" secondAttribute="bottom" id="TFT-iQ-sRs"/>
+                            <constraint firstItem="E5K-pk-VDY" firstAttribute="trailing" secondItem="jpX-Jr-cCo" secondAttribute="trailing" id="rDe-Rr-ZUU"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="myImageView" destination="Zbh-rU-7EI" id="gt3-H4-npG"/>
-                        <outlet property="myScrollView" destination="cVS-T3-cfH" id="pf6-Z0-9dh"/>
+                        <outlet property="myImageView" destination="obu-9h-Ech" id="pS8-bm-eIy"/>
+                        <outlet property="myScrollView" destination="E5K-pk-VDY" id="5Lu-2q-4YS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ATe-1P-VPd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
