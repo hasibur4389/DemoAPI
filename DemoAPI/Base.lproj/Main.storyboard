@@ -21,32 +21,46 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="grW-wp-xnO">
-                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="itemSize" width="384" height="185"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="6GK-OY-H9B" customClass="MyCollectionViewCell" customModule="DemoAPI" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                        <rect key="frame" x="4.666666666666667" y="0.0" width="384" height="185"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="PoM-lA-wWa">
-                                            <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384" height="185"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kda-HW-17B">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JPS-5Z-jba">
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="185"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="240" id="f9L-Uu-VH0"/>
+                                                    </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oMi-88-FQf">
+                                                    <rect key="frame" x="250" y="0.0" width="134" height="185"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Kda-HW-17B" secondAttribute="trailing" id="4Ng-51-np0"/>
-                                                <constraint firstAttribute="bottom" secondItem="Kda-HW-17B" secondAttribute="bottom" id="989-vL-aM7"/>
-                                                <constraint firstItem="Kda-HW-17B" firstAttribute="leading" secondItem="PoM-lA-wWa" secondAttribute="leading" id="C5e-aH-Mge"/>
-                                                <constraint firstItem="Kda-HW-17B" firstAttribute="top" secondItem="PoM-lA-wWa" secondAttribute="top" id="EHk-eY-hVR"/>
+                                                <constraint firstItem="oMi-88-FQf" firstAttribute="top" secondItem="PoM-lA-wWa" secondAttribute="top" id="3hy-KM-vO2"/>
+                                                <constraint firstAttribute="trailing" secondItem="oMi-88-FQf" secondAttribute="trailing" id="ACt-1g-Orc"/>
+                                                <constraint firstItem="oMi-88-FQf" firstAttribute="leading" secondItem="JPS-5Z-jba" secondAttribute="trailing" constant="10" id="D9S-Zo-6Cq"/>
+                                                <constraint firstAttribute="bottom" secondItem="oMi-88-FQf" secondAttribute="bottom" id="Iek-Ia-gGC"/>
+                                                <constraint firstItem="JPS-5Z-jba" firstAttribute="top" secondItem="PoM-lA-wWa" secondAttribute="top" id="dO9-xw-8By"/>
+                                                <constraint firstAttribute="bottom" secondItem="JPS-5Z-jba" secondAttribute="bottom" id="oZd-tw-YYl"/>
+                                                <constraint firstItem="JPS-5Z-jba" firstAttribute="leading" secondItem="PoM-lA-wWa" secondAttribute="leading" id="skO-vp-iiE"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <size key="customSize" width="384" height="185"/>
                                         <connections>
-                                            <outlet property="myImageView" destination="Kda-HW-17B" id="PGz-aY-HKQ"/>
+                                            <outlet property="myImageView" destination="JPS-5Z-jba" id="QIg-75-kMn"/>
+                                            <outlet property="myLabel" destination="oMi-88-FQf" id="0of-AP-l9V"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -88,7 +102,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="esJ-qA-cNg" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="obu-9h-Ech">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="obu-9h-Ech">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                             </imageView>
                                         </subviews>

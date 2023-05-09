@@ -7,21 +7,26 @@ class ShowImageVC: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet var myScrollView: UIScrollView!
     
-    var imageWidth: CGFloat = 0.0
-    var imageHeight: CGFloat = 0.0
+    // MARK: Gesture Recognizer
+//    var imageWidth: CGFloat = 0.0
+//    var imageHeight: CGFloat = 0.0
+//    var currentScale: CGFloat = 1.0
     
     var largeImage : UIImage?
-    var currentScale: CGFloat = 1.0
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
         myScrollView.delegate = self
         myScrollView.maximumZoomScale = 5.0
+        // MARK: ts problematic, pushes the scaled down image to the left corner everytime so to resolve zoom out  we need to impplement centerImage() method and call from viewDidZoom()
+        myScrollView.minimumZoomScale = 1.0
         
        
         print("in ShowImageVC")
         if let largeImage = largeImage {
             myImageView.image = largeImage
+            centerImage()
 
             
             // MARK: For GestureRecognizer
@@ -34,7 +39,8 @@ class ShowImageVC: UIViewController, UIScrollViewDelegate {
         else {
             print("found nil")
         }
-      //  setupScrollView()
+        
+      // MARK: Gesture Recognizer
       // addGesture()
     
     }
@@ -47,11 +53,39 @@ class ShowImageVC: UIViewController, UIScrollViewDelegate {
     }
 
     
-  
-   
-  
-   
+
     
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        centerImage()
+    }
+    
+    
+    func centerImage() {
+        
+        // center the zoom view as it becomes smaller than the size of the screen
+        let boundsSize = myScrollView.bounds.size
+        var frameToCenter = myImageView?.frame ?? CGRect.zero
+        
+        // center horizontally
+        if frameToCenter.size.width < boundsSize.width {
+            frameToCenter.origin.x = (boundsSize.width - frameToCenter.size.width)/2
+        }
+        else {
+            frameToCenter.origin.x = 0
+        }
+        
+        // center vertically
+        if frameToCenter.size.height < boundsSize.height {
+            frameToCenter.origin.y = (boundsSize.height - frameToCenter.size.height)/2
+        }
+        else {
+            frameToCenter.origin.y = 0
+        }
+        
+        myImageView?.frame = frameToCenter
+    }
+   
+   
   
     
     

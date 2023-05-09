@@ -9,6 +9,8 @@ import UIKit
 
 struct UnsplashItem: Codable {
     var id: String
+    var description: String
+    var alt_description: String
    
     var urls: [String: String]
     

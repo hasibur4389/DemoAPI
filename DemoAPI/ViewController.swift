@@ -17,7 +17,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var loader: UIAlertController?
     var calls = 0
     
-    let per_page = 15
+    let per_page = 5
     var page = 1
 
     @IBOutlet var myCollectionView: UICollectionView!
@@ -103,7 +103,16 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                             print("Creating UnspalshItem")
                             for j in json{
                                 if let id = j["id"] as? String, let urls = j["urls"] as? [String: String] {
-                                    let item = UnsplashItem(id: id, urls: urls)
+                                    var item = UnsplashItem(id: id, description: "", alt_description: "", urls: urls)
+                                    
+                                    if let desc = j["description"] as? String {
+                                        item.description = desc
+                                    }else {item.description = "No description found"}
+                
+                                    if let alt_desc = j["alt_description"] as? String {
+                                        item.alt_description = alt_desc
+                                    }else{item.alt_description = "No alt_description founf"}
+                                    
                                     self.unsplashItems.append(item)
                                 }
                             }
@@ -156,7 +165,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if indexPath.item == unsplashItems.count - 6{
+        if indexPath.item == unsplashItems.count - 2{
             // load another 15 images
             page += 1
             fetchAPIData(pageNo: page)
@@ -177,7 +186,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         loader = self.loader()
 
         DispatchQueue.global().async { [self] in
-            setImage(item: item, vc: vc)
+            downloadImage(item: item, vc: vc)
         }
         
      //   navigationController?.pushViewController(vc, animated: true)
@@ -185,11 +194,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
        
       }
     
-    func setImage(item: UnsplashItem, vc: ShowImageVC){
+    func downloadImage(item: UnsplashItem, vc: ShowImageVC){
         
         print("in setImage")
        //download
-        let catPictureURL = URL(string: item.urls["regular"]!)!
+        let catPictureURL = URL(string: item.urls["raw"]!)!
 
             // Creating a session object with the default configuration.
             
@@ -263,6 +272,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         let item = unsplashItems[indexPath.row]
         cell.urlString = item.urls["thumb"]
+        cell.myLabel.numberOfLines = 0
+        cell.myLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        cell.myLabel.text = item.description
         cell.myImageView.layer.cornerRadius = 15
       //  print("returnin cell \(indexPath)")
         
@@ -273,14 +285,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.frame.size.width/3 - 3, height: collectionView.frame.size.height/5 - 3)
+        CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height/5 - 3)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         3
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        3
+        0
     }
 
 }

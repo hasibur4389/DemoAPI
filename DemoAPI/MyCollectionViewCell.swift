@@ -10,6 +10,8 @@ import UIKit
 class MyCollectionViewCell: UICollectionViewCell {
     
     
+    @IBOutlet var myLabel: UILabel!
+    
     @IBOutlet var myImageView: UIImageView!
     
     var urlString: String? {
@@ -40,6 +42,7 @@ class MyCollectionViewCell: UICollectionViewCell {
                                 DispatchQueue.main.async { [self] in
                                     let image = UIImage(data: imageData)
                                     myImageView.image = image
+                                   
                                 }
                                // print("in CollectionViewCell")
                                
