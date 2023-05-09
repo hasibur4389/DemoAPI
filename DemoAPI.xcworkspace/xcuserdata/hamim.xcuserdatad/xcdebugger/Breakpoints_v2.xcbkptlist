@@ -26,8 +26,8 @@
             filePath = "DemoAPI/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "fetchAPIData(pageNo:)"
             landmarkType = "7">
             <Locations>
@@ -60,6 +60,21 @@
                   startingLineNumber = "101"
                   endingLineNumber = "101"
                   offsetFromSymbolStart = "3868">
+               </Location>
+               <Location
+                  uuid = "F67C79BA-AD58-4C23-9609-A6FDBEA62C46 - 8901bb8db142a63f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in DemoAPI.ViewController.fetchAPIData(pageNo: Swift.Int) -&gt; ()"
+                  moduleName = "DemoAPI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hamim/Desktop/DemoAPI/DemoAPI/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "103"
+                  endingLineNumber = "103"
+                  offsetFromSymbolStart = "4332">
                </Location>
             </Locations>
          </BreakpointContent>
